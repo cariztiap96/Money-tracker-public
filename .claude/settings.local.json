@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(export PATH=\"$PATH:/c/Program Files/nodejs:/c/Users/crist/AppData/Roaming/npm\")",
+      "Bash(where npm:*)",
+      "Read(//c/Program Files/**)",
+      "Read(//c/Users/crist/Desktop/AI projects/Money tracker/$LOCALAPPDATA/Programs/**)",
+      "Read(//c/Users/crist/Desktop/AI projects/Money tracker/$APPDATA/**)",
+      "Bash(cmd.exe /c \"where node 2>&1\")",
+      "Bash(cmd.exe /c \"where npm 2>&1\")",
+      "Bash(cmd.exe /c \"where node\")",
+      "Bash(cmd.exe /c \"where npm\")",
+      "Bash(npx --version)"
+    ]
+  }
+}

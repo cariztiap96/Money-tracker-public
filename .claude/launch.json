@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Money Tracker (Static)",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-ExecutionPolicy", "Bypass", "-File", "serve.ps1", "5500"],
+      "port": 5500
+    }
+  ]
+}

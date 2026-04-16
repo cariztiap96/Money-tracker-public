@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Money Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <main class="main">
+    <div class="content">
+      <section class="page active" id="page-budget">
+        <div class="budget-layout">
+
+          <!-- ── Left: Chart ── -->
+          <div class="budget-chart-panel">
+            <div class="chart-wrapper">
+              <canvas id="budgetPieChart"></canvas>
+            </div>
+          </div>
+
+          <!-- ── Right: Cards + Accordion ── -->
+          <div class="budget-right-col">
+
+            <div class="summary-cards">
+              <div class="summary-card summary-card-full">
+                <input class="summary-card-input" id="ingresosInput" type="text" inputmode="numeric" />
+                <span class="summary-card-label">Ingresos</span>
+              </div>
+            </div>
+
+            <div class="budget-table-panel">
+              <div class="gastos-header">
+                <span class="gastos-title">Gastos</span>
+                <span class="gastos-total" id="gastosValue">0</span>
+              </div>
+              <div class="accordion" id="budgetAccordion"></div>
+            </div>
+
+            <div class="summary-cards">
+              <div class="summary-card summary-card-full">
+                <span class="summary-card-value" id="ahorroValue">0</span>
+                <span class="summary-card-label">Ahorro</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- Shared category dropdown (singleton) -->
+        <div id="catDropdown">
+          <input class="cat-search" id="catDropSearch"
+                 placeholder="Select an option or create one"
+                 autocomplete="off" spellcheck="false" />
+          <div class="cat-options-list" id="catOptionsList"></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Shared emoji picker (singleton) -->
+  <div id="emojiPickerOverlay">
+    <emoji-picker></emoji-picker>
+  </div>
+
+  <!-- Shared confirmation modal (singleton) -->
+  <div id="confirmModalOverlay" class="confirm-modal-overlay">
+    <div class="confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirmModalMessage">
+      <p class="confirm-modal-message" id="confirmModalMessage"></p>
+      <div class="confirm-modal-actions">
+        <button class="confirm-modal-btn confirm-modal-btn-no" id="confirmModalNo">No</button>
+        <button class="confirm-modal-btn confirm-modal-btn-yes" id="confirmModalYes">Sí</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
