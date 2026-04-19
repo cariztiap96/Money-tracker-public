@@ -322,10 +322,10 @@ function itemRowHTML(item) {
     <td class="drag-handle-cell" title="Drag to another category">
       <span class="drag-handle">⠿</span>
     </td>
-    <td><input class="editable-cell amount-cell" data-id="${item.id}" data-field="amount"
-               value="${formatCLP(item.amount)}" data-raw="${item.amount}" type="text" /></td>
     <td><input class="editable-cell" data-id="${item.id}" data-field="name"
                value="${item.name.replace(/"/g, '&quot;')}" type="text" /></td>
+    <td><input class="editable-cell amount-cell" data-id="${item.id}" data-field="amount"
+               value="${formatCLP(item.amount)}" data-raw="${item.amount}" type="text" /></td>
     <td><button class="delete-btn" data-id="${item.id}" title="Delete">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -789,7 +789,7 @@ function renderBudgetChart() {
                 return c.label;
               },
               label: ctx => {
-                const pct = total > 0 ? ((ctx.parsed / total) * 100).toFixed(1) : 0;
+                const pct = chartCatData.total > 0 ? ((ctx.parsed / chartCatData.total) * 100).toFixed(1) : '0.0';
                 return ` ${ctx.parsed.toLocaleString('es-CL')}  (${pct}%)`;
               }
             }
@@ -1152,6 +1152,12 @@ function initBudgetEvents() {
     item.amount       = -entered;
     input.dataset.raw = item.amount;
     input.value       = formatCLP(item.amount);
+    const catGroup = accordion.querySelector(`.acc-group[data-cat="${CSS.escape(item.category || '')}"]`);
+    if (catGroup) {
+      const catTotal = budgetItems.filter(i => i.category === item.category).reduce((s, i) => s + i.amount, 0);
+      const totalEl = catGroup.querySelector('.acc-header .acc-total');
+      if (totalEl) totalEl.textContent = formatCLP(catTotal);
+    }
     renderBudgetChart();
     renderSummaryStats();
     renderSummaryCards();
